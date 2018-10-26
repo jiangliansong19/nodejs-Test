@@ -16,11 +16,13 @@ var comment = require("./User/comment.js")
 var changeInfo = require("./User/changeInfo.js")
 var beauty = require("./User/py_beauty.js")
 
-
+app.get('/', function (req, res) {
+	res.send('Hello World');
+ })
 
 app.get("/login.html", function(req, res) {
-	var path = __dirname + "/" + "../public/login.html" ;
-	res.sendFile( __dirname + "/" + "../public/login.html" );
+	var path = __dirname + "/public/login.html" ;
+	res.sendFile(path);
 })
 
 //登录
@@ -51,7 +53,7 @@ app.get("/beautyList", function(req, res) {
 
 
 
-var server = app.listen(8887, function() {
+var server = app.listen(8888, function() {
 
 	var host = server.address().address
 	var port = server.address().port
