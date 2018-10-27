@@ -8,19 +8,34 @@
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%,-50%);
-			background: orange;
 			padding: 20px;
+		}
+		form input {
+			width: 200px;
+			height: 28px;
+			line-height: 40px;
+			margin: 10px 20px;
+		}
+		form button {
+			height: 40px;
+			background-color: lightblue;
+			margin: 10px 20px;
+			width: 200px;
+			height: 35px;
 		}
 	</style>
 </head>
 <body>
 
 <body>
-	<form action="http://127.0.0.1:8887/login" method="POST">
-		First Name: <input type="text" name="account"><br>
-		Last Name: <input type="text" name="password">
-		<input type="submit" value="Submit">
-	</form>
+	<div class="content">
+		<form action="http://127.0.0.1:8888/login" method="POST">
+			<input type="text" name="account"><br />
+			<input type="text" name="password"><br />
+			<button type="submit">login</button>
+		</form>
+	</div>
+
 </body>
 
 </body>
