@@ -15,6 +15,7 @@ function getConnection() {
 exports.login = function login(request, response) {
 
   var account = request.body.account;
+console.log("account = " + account);
   var password = request.body.password;
 
   // var  sql = "select * from user where account='" + account + "'";
@@ -34,13 +35,12 @@ exports.login = function login(request, response) {
 
     if (account == obj.account) {
       if (password == obj.password) {
-        response.end(string);
+       return response.send(string);
       } else {
-        response.end("{'errorcode':100078,'message':'密码错误'}");
+           return  response.send("{'errorcode':100078,'message':'密码错误'}");
       }
     }
-    response.end("{'errorcode':100094,'message':'账号不存在'}");
+    return response.send("{'errorcode':100094,'message':'账号不存在'}");
   });
-
-  connection.end();
+;
 }
