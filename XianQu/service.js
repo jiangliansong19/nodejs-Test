@@ -3,6 +3,8 @@ var url = require("url");
 var express = require("express");
 var app = express();
 var bodyParser = require('body-parser');
+// app.use(express.static('public'));
+app.use(express.static(require('path').join(__dirname, 'public')));
 // 创建 application/x-www-form-urlencoded 编码解析
 var urlencodedParser = bodyParser.urlencoded({
 	extended: false
@@ -21,12 +23,14 @@ app.get('/', function (req, res) {
  })
 
 app.get("/login.html", function(req, res) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	var path = __dirname + "/public/login.html" ;
 	res.sendFile(path);
 })
 
 //登录
 app.post("/login", urlencodedParser, function(req, res) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	login.login(req, res);
 });
 

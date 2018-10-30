@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>login</title>
+	<script type="text/javascript" src="js/jQuery3.3.1.js"></script>
+	<script type="text/javascript" src="js/jQuery.form.js"></script>
 	<style type="text/css">
 		.content {
 			position: absolute;
@@ -24,17 +26,55 @@
 			height: 35px;
 		}
 	</style>
+
 </head>
 <body>
 
 <body>
 	<div class="content">
-		<form action="http://47.107.210.52:8888/login" method="POST">
+		<form id="form1">
 			<input type="text" name="account"><br />
 			<input type="text" name="password"><br />
-			<button type="submit">login</button>
 		</form>
+		<button id="loginButtn">login</button>
 	</div>
+
+	<script>
+			// $(function(){
+			// /** 验证文件是否导入成功  */
+			// 	$("#form1").ajaxForm(function(data){  
+			// 		if(data=="1"){
+			// 			console.log("提交成功！");   
+			// 		}
+			// 	});
+			// });   
+			$(document).ready(function(){
+				$("#loginButtn").click(function(){
+					var account = document.forms[0].elements[0].value;
+					var password = document.forms[0].elements[1].value;
+					$.ajax({
+						type:"post",
+						url:"http://127.0.0.1:8888/login",
+						data:{account:account, password:password},
+						dataType: "json",
+						async:true,
+						success:function(result) {
+							// console.log("success: " + result);
+							console.log("user = " + JSON.stringify(result));
+							localStorage.setItem("user",JSON.stringify(result));
+							
+
+							location.href = "info.html"
+						},
+						failure:function(error) {
+							console.log(error);
+						}
+					});
+				})
+			})
+	
+	
+		</script>
 
 </body>
 
