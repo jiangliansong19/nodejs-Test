@@ -50,17 +50,19 @@
 					var password = document.forms[0].elements[1].value;
 					$.ajax({
 						type: "post",
-						url: "http://127.0.0.1:8888/login",
+						url: "http://47.107.210.52:8888/login",
 						data: { account: account, password: password },
 						dataType: "json",
 						async: true,
 						success: function (result) {
+							if (result.account) {
+								console.log("user = " + JSON.stringify(result));
+								localStorage.setItem("user", JSON.stringify(result));
+								location.href = "info.html"
+							} else {
+								alert(result.message);
+							}
 
-							console.log("user = " + JSON.stringify(result));
-							localStorage.setItem("user", JSON.stringify(result));
-
-
-							location.href = "info.html"
 						},
 						failure: function (error) {
 							console.log(error);

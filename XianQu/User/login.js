@@ -28,7 +28,7 @@ exports.login = function login(request, response) {
       console.log('[SELECT ERROR] - ', err.message);
       return response.send("{'errorcode':100058,'message':'数据库查询失败'}");
     }else if(!result || !result.length) {
-      return response.send("{'errorcode':100094,'message':'账号不存在'}");
+      return response.send(JSON.stringify({'errorcode':100078,'message':'账号不存在'}));
     }
 
     var string = JSON.stringify(result[0]);
