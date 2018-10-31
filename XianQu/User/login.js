@@ -23,17 +23,17 @@ exports.login = function login(request, response) {
   connection.connect();
   var sql = "select * from user where account='" + account + "';";
   connection.query(sql, function (err, result) {
+    
     if (err) {
       console.log('[SELECT ERROR] - ', err.message);
       return response.send("{'errorcode':100058,'message':'数据库查询失败'}");
-    }else if(!result) {
+    }else if(!result || !result.length) {
       return response.send("{'errorcode':100094,'message':'账号不存在'}");
     }
 
     var string = JSON.stringify(result[0]);
-    console.log("loginString:" + string);
     var obj = JSON.parse(string);
-    console.log('SELECT result: ' + string);
+    console.log("loginString:" + string);
 
     if (account == obj.account) {
       if (password == obj.password) {
@@ -42,7 +42,6 @@ exports.login = function login(request, response) {
         return response.send("{'errorcode':100078,'message':'密码错误'}");
       }
     }
-    return response.send("{'errorcode':100094,'message':'账号不存在'}");
+
   });
-  ;
 }
