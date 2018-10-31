@@ -26,7 +26,7 @@ exports.login = function login(request, response) {
     if (err) {
       console.log('[SELECT ERROR] - ', err.message);
       return response.send("{'errorcode':100058,'message':'数据库查询失败'}");
-    }else if(result[0]) {
+    }else if(!result) {
       return response.send("{'errorcode':100094,'message':'账号不存在'}");
     }
 
