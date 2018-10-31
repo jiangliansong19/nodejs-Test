@@ -27,21 +27,22 @@ exports.login = function login(request, response) {
     if (err) {
       console.log('[SELECT ERROR] - ', err.message);
       return response.send("{'errorcode':100058,'message':'数据库查询失败'}");
-    }else if(!result || !result.length) {
-      return response.send(JSON.stringify({'errorcode':100078,'message':'账号不存在'}));
     }
 
-    var string = JSON.stringify(result[0]);
-    var obj = JSON.parse(string);
-    console.log("loginString:" + string);
-
-    if (account == obj.account) {
-      if (password == obj.password) {
+    if (result.length && result[0]) {
+      var string = JSON.stringify(result[0]);
+      var obj = JSON.parse(string);
+      console.log("loginString:" + string);
+  
+      if (account == obj.account && password == obj.password) {
         return response.send(string);
       } else {
         return response.send("{'errorcode':100078,'message':'密码错误'}");
       }
+    }else {
+      return response.send(JSON.stringify({'errorcode':100078,'message':'账号不存在'}));
     }
+
 
   });
 }
