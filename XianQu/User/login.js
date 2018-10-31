@@ -25,7 +25,7 @@ console.log("account = " + account);
   connection.query(sql, function(err, result) {
     if (err) {
       console.log('[SELECT ERROR] - ', err.message);
-      return;
+      return response.send("{'errorcode':100058,'message':'数据库查询失败'}");
     }
 
     var string = JSON.stringify(result[0]);
