@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>login</title>
 	<script type="text/javascript" src="js/jQuery3.3.1.js"></script>
@@ -9,15 +10,17 @@
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			transform: translate(-50%,-50%);
+			transform: translate(-50%, -50%);
 			padding: 20px;
 		}
+
 		form input {
 			width: 200px;
 			height: 28px;
 			line-height: 40px;
 			margin: 10px 20px;
 		}
+
 		form button {
 			height: 40px;
 			background-color: lightblue;
@@ -28,55 +31,51 @@
 	</style>
 
 </head>
-<body>
 
 <body>
-	<div class="content">
-		<form id="form1">
-			<input type="text" name="account"><br />
-			<input type="text" name="password"><br />
-		</form>
-		<button id="loginButtn">login</button>
-	</div>
 
-	<script>
-			// $(function(){
-			// /** 验证文件是否导入成功  */
-			// 	$("#form1").ajaxForm(function(data){  
-			// 		if(data=="1"){
-			// 			console.log("提交成功！");   
-			// 		}
-			// 	});
-			// });   
-			$(document).ready(function(){
-				$("#loginButtn").click(function(){
+	<body>
+		<div class="content">
+			<form id="form1">
+				<input type="text" name="account"><br />
+				<input type="text" name="password"><br />
+			</form>
+			<button id="loginButtn">login</button>
+		</div>
+
+		<script>
+			$(document).ready(function () {
+				$("#loginButtn").click(function () {
 					var account = document.forms[0].elements[0].value;
 					var password = document.forms[0].elements[1].value;
 					$.ajax({
-						type:"post",
-						url:"http://127.0.0.1:8888/login",
-						data:{account:account, password:password},
+						type: "post",
+						url: "http://47.107.210.52:8888/login",
+						data: { account: account, password: password },
 						dataType: "json",
-						async:true,
-						success:function(result) {
-							// console.log("success: " + result);
-							console.log("user = " + JSON.stringify(result));
-							localStorage.setItem("user",JSON.stringify(result));
-							
+						async: true,
+						success: function (result) {
+							if (result.account) {
+								console.log("user = " + JSON.stringify(result));
+								localStorage.setItem("user", JSON.stringify(result));
+								location.href = "info.html"
+							} else {
+								alert(result.message);
+							}
 
-							location.href = "info.html"
 						},
-						failure:function(error) {
+						failure: function (error) {
 							console.log(error);
 						}
 					});
 				})
 			})
-	
-	
+
+
 		</script>
 
-</body>
+	</body>
 
 </body>
+
 </html>

@@ -15,32 +15,34 @@ function getConnection() {
 exports.login = function login(request, response) {
 
   var account = request.body.account;
-console.log("account = " + account);
+  console.log("account = " + account);
   var password = request.body.password;
 
   // var  sql = "select * from user where account='" + account + "'";
   var connection = getConnection();
   connection.connect();
   var sql = "select * from user where account='" + account + "';";
-  connection.query(sql, function(err, result) {
+  connection.query(sql, function (err, result) {
+    
     if (err) {
       console.log('[SELECT ERROR] - ', err.message);
-      return;
+      return response.send("{'errorcode':100058,'message':'数据库查询失败'}");
     }
 
-    var string = JSON.stringify(result[0]);
-    console.log("loginString:" + string);
-    var obj = JSON.parse(string);
-    console.log('SELECT result: ' + string);
-
-    if (account == obj.account) {
-      if (password == obj.password) {
-       return response.send(string);
+    if (result.length && result[0]) {
+      var string = JSON.stringify(result[0]);
+      var obj = JSON.parse(string);
+      console.log("loginString:" + string);
+  
+      if (account == obj.account && password == obj.password) {
+        return response.send(string);
       } else {
-           return  response.send("{'errorcode':100078,'message':'密码错误'}");
+        return response.send("{'errorcode':100078,'message':'密码错误'}");
       }
+    }else {
+      return response.send(JSON.stringify({'errorcode':100078,'message':'账号不存在'}));
     }
-    return response.send("{'errorcode':100094,'message':'账号不存在'}");
+
+
   });
-;
 }
