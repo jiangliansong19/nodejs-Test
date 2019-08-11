@@ -45,8 +45,10 @@ export default {
         },
         //是否显示分享提示
         showCover: function (){
-            // this.showHide = !this.showHide;
-            window.bridge.showMsg("JS调用Native的方法");
+            //this.showHide = !this.showHide;
+
+            window.bridge.showMsg("JS调用Android的方法");
+
         },
         //根据分数显示提示
         getScoreTip: function (){
