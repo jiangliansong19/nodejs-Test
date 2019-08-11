@@ -55,12 +55,21 @@
         <script type="text/javascript">
         
 
-              $(document).ready(function(){
-                var user = JSON.parse(localStorage.getItem("user"));
-                $("#account").text(user.account);
-                $("#avatar").attr("src",user.avatar_url);
-                console.log("card.a account = " + user.account);
-              })
+          $(document).ready(function () {
+            var user = JSON.parse(localStorage.getItem("user"));
+            $("#account").text(user.account);
+            $("#avatar").attr("src", user.avatar_url);
+            console.log("card.a account = " + user.account);
+          })
+
+
+          function useCamera() {
+            window.webkit.messageHandlers.openCamera.postMessage(null);
+          }
+          function useVideo(vedio) {
+            var obj = { "name": "God", "Author": "Jhon Trank" };
+            window.webkit.messageHandlers.playVideo.postMessage(obj);
+          }
 
         </script>
     </body>
