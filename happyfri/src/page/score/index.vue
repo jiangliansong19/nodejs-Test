@@ -6,7 +6,7 @@
         </div>
         <div class="share_button" @click="showCover"></div>
         <div class="share_code">
-            <header class="share_header">关注葡萄之家，获取答案。</header>
+            <header class="share_header">关注Mobile技术支持，获取答案。</header>
             <img src="../../images/4-4.png" height="212" width="212" class="code_img"> 
         </div>
         <div class="share_cover" v-show="showHide" @click="showCover">
@@ -25,7 +25,7 @@ export default {
             score: 0, //分数
             scoreTips:'', //分数提示
             rightAnswer: [2, 7, 12, 13, 18], //正确答案
-            scoreTipsArr:['你说，是不是把知识都还给小学老师了？','还不错，但还需要继续加油哦！','不要嘚瑟还有进步的空间！','智商离爆表只差一步了！','你也太聪明啦，葡萄之家欢迎你！'],
+            scoreTipsArr:['你说，是不是把知识都还给小学老师了？','还不错，但还需要继续加油哦！','不要嘚瑟还有进步的空间！','智商离爆表只差一步了！','你也太聪明啦，Mobile技术支持欢迎你！'],
         }
     },
     computed: mapState(['answerid']),
